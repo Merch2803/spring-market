@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -17,7 +18,7 @@ public class Cart {
     }
 
     public List<Product> getItems() {
-        return items;
+        return Collections.unmodifiableList(items);
     }
 
     public void addProduct(Product product) {

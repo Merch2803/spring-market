@@ -1,6 +1,7 @@
 package com.merch.spring.market.controllers;
 
 import com.merch.spring.market.models.Product;
+import com.merch.spring.market.repositories.ProductRepository;
 import com.merch.spring.market.utils.Cart;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,11 @@ import java.util.List;
 @Slf4j
 public class CartController {
     private final Cart cart;
+    private final ProductRepository productRepository;
 
     @GetMapping("/add")
-    public void addProductToCart(@RequestParam Long id, @RequestParam String title, @RequestParam int price) {
-        Product product = new Product(id, title, price);
+    public void addProductToCart(@RequestParam Long id) {
+        Product product = productRepository.getById(id);
         cart.addProduct(product);
     }
 
@@ -26,9 +28,10 @@ public class CartController {
         return cart.getItems();
     }
 
-    @DeleteMapping("/clear")
+    @GetMapping("/clear")
     public void clearCart() {
         cart.clearCart();
+        log.info("Cart was cleaned");
     }
 
 }

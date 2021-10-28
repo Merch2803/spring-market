@@ -19,14 +19,12 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
 
-    $scope.addProductToCart = function (productId, title, price) {
+    $scope.addProductToCart = function (productId) {
         $http({
             url: contextPath + '/api/v1/cart/add',
             method: 'GET',
             params: {
-                id: productId,
-                title: title,
-                price: price
+                id: productId
             }
         }).then(function (response) {
             $scope.getProductCarts();
@@ -44,7 +42,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.clearCart = function () {
         $http({
             url: contextPath + '/api/v1/cart/clear',
-            method: 'DELETE'
+            method: 'GET'
         }).then(function (response) {
             $scope.getProductCarts();
         }, function errorCallback(response) {
