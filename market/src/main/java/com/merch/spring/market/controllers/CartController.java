@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/cart")
@@ -19,12 +20,13 @@ public class CartController {
 
     @GetMapping("/add")
     public void addProductToCart(@RequestParam Long id) {
-        Product product = productRepository.getById(id);
+        Product product = productRepository.findById(id).get();
         cart.addProduct(product);
+        log.info("Added product to cart");
     }
 
     @GetMapping
-    public List<Product> showAllProductsInCart() {
+    public Map<Product, Integer> showAllProductsInCart() {
         return cart.getItems();
     }
 

@@ -1,28 +1,26 @@
 package com.merch.spring.market.utils;
 
 import com.merch.spring.market.models.Product;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class Cart {
-    private List<Product> items;
+    private Map<Product, Integer> items;
 
     @PostConstruct
     public void init() {
-        items = new ArrayList<>();
+        items = new LinkedHashMap<>();
     }
 
-    public List<Product> getItems() {
-        return Collections.unmodifiableList(items);
+    public Map<Product, Integer> getItems() {
+        return Collections.unmodifiableMap(items);
     }
 
     public void addProduct(Product product) {
-        items.add(product);
+        items.put(product, items.getOrDefault(product, 0) + 1);
     }
 
     public void clearCart() {
