@@ -1,6 +1,7 @@
 package com.merch.spring.market.controllers;
 
 import com.merch.spring.market.models.Product;
+import com.merch.spring.market.models.ProductDTO;
 import com.merch.spring.market.repositories.ProductRepository;
 import com.merch.spring.market.utils.Cart;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/cart")
@@ -26,7 +28,7 @@ public class CartController {
     }
 
     @GetMapping
-    public Map<Product, Integer> showAllProductsInCart() {
+    public Set<ProductDTO> showAllProductsInCart() {
         return cart.getItems();
     }
 

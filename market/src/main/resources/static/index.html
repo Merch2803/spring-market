@@ -72,11 +72,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="(p, value) in productsInCart">
-                <td>{{p}}</td>
-                <td>{{p.key.title}}</td>
+            <tr ng-repeat="p in productsInCart">
+                <td>{{p.id}}</td>
+                <td>{{p.title}}</td>
                 <td>{{p.price}}</td>
-                <td>{{value}}</td>
+                <td>{{p.count}}</td>
             </tr>
             </tbody>
         </table>

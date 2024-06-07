@@ -35,25 +35,8 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.getProductCarts = function () {
         $http.get(contextPath + '/api/v1/cart')
             .then(function (response) {
-                const rawData = response.data;
-
-                console.log(rawData)
-
-                // Convert the received object to an array of key-value pairs
-                $scope.productsInCart = Object.entries(rawData).map(([key, value]) => {
-                    const parsedKey = JSON.parse(key);
-                    return {
-                        key: new Product(parsedKey.id, parsedKey.title, parsedKey.price),
-                        value: value
-                    };
-                });
+                $scope.productsInCart = response.data;
             });
-    }
-
-    function Product(id, title, price) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
     }
 
     $scope.clearCart = function () {
